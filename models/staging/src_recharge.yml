@@ -1,0 +1,62 @@
+version: 2
+
+sources:
+  - name: recharge
+    description: Subscriptions payments platform designed for merchants to set up and manage dynamic recurring billing across web and mobile.
+    database: dev_fivetran
+    schema: recharge
+    
+    tables:
+      - name: product
+        description: Table of all products sold on the merchant's website.
+        columns:
+          - name: id
+            description: The unique ID of the product.
+          - name: title
+            description: The product title retrived from Shopify.
+          - name: discount_amount
+            description: The discount amount applied on the product.
+          - name: discount_type
+            description: The type of discount.
+          - name: handle
+            description: A human-friendly unique string for the product automatically generated from Shopify.
+          - name: large_image
+            description: A large image file of the product.
+          - name: medium_image
+            description: A medium image file of the product.
+          - name: original_image
+            description: The oringnal image file of the product.
+          - name: small_image
+            description: A small image file of the product.
+          - name: subscription_defaults_charge_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each charge.
+          - name: subscription_defaults_cutoff_day_of_month
+            description: Number of day in month on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+          - name: subscription_defaults_cutoff_day_of_week
+            description: Number of day in week on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+          - name: subscription_defaults_expire_after_specific_number_of_charges
+            description: Number of charges until the subscription expires. # Will be expired, use expire_after_specific_number_of_charges instead.
+          - name: subscription_defaults_modifiable_properties
+            description: A list of modifiable line item properties (e.g. ["box-edition", "christmas-special"])
+          - name: subscription_defaults_number_charges_until_expiration
+            description: Number of charges until the subscription expires.
+          - name: subscription_defaults_order_day_of_month
+            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
+          - name: subscription_defaults_order_day_of_week
+            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”; value of 0 equals to Monday, 1 to Tuesday etc.
+          - name: subscription_defaults_order_interval_frequency_options
+            description: List of order interval frequency options that a customer can choose from (e.g. order_interval_unit = month and order_internal_frequency_option for 3 would be an order every 3 months).
+          - name: subscription_defaults_order_interval_unit
+            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+          - name: subscription_defaults_storefront_purchase_options
+            description: Placeholder.
+          - name: collection_id
+            description: Unique numeric identifier for the ruleset charge in Recharge.
+          - name: shopify_product_id
+            description: Unique numeric identifier of the product in Shopify.
+          - name: created_at
+            description: Date and time when the product was created.
+          - name: updated_at
+            description: Date and time when the product was updated.
+          - name: is_deleted
+            description: Boolean indicating if the product has been deleted.
