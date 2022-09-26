@@ -61,7 +61,6 @@ sources:
           - name: is_deleted
             description: Boolean indicating if the product has been deleted.
 
-
       - name: subscription
         description: Table of all subscriptions for the merchant.
         columns:
