@@ -55,8 +55,60 @@ sources:
           - name: shopify_product_id
             description: Unique numeric identifier of the product in Shopify.
           - name: created_at
-            description: Date and time when the product was created.
+            description: The date and time when the product was created.
           - name: updated_at
-            description: Date and time when the product was updated.
+            description: The date and time when the product was updated.
           - name: is_deleted
             description: Boolean indicating if the product has been deleted.
+
+      - name: subscription
+        description: Table of all subscriptions for the merchant.
+        columns:
+          - name: id
+            description: The unique ID of the subscription.
+          - name: address_id
+            description: Unique numeric identifier for the address the subscription is associated with.
+          - name: customer_id
+            description: Unique numeric identifier for the customer the subscription is ties to.
+          - name: created_at
+            description: The date and time when the subscription was created.
+          - name: cancelled_at
+            description: The date and time when the subscription was cancelled.
+          - name: next_charge_scheduled_at
+            description: Date of the next charge for the subscription.
+          - name: price
+            description: The price of the item before discounts, taxes, or shipping have been applied.
+          - name: quantity
+            description: The number of items in the subscription.
+          - name: status
+            description: The status of the subscription; active = the subscription is active, cancelled = the subscription has been cancelled, expired = the subscription has expired - this occurs when the maximum number of charges for product have been reached.
+          - name: cancellation_reason
+            description: Reason provided for cancellation.
+          - name: cancellation_reason_comments
+            description: Additional comment for cancellation.
+          - name: product_title
+            description: The name of the product in a shop's catalog.
+          - name: variant_title
+            description: The name of the variant in a shop's catalog.
+          - name: shopify_product_id
+            description: Unique numeric identifier of the product in Shopify.
+          - name: shopify_variant_id
+            description: Unique numeric identifier of the product variant in Shopify.
+          - name: sku
+            description: A unique identifier of the item in fulfillment.
+          - name: order_interval_unit
+            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+          - name: order_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each order, e.g. order_interval_unit = 'month' and order_interval frequency = 3 indicates an order every 3 months.
+          - name: charge_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each charge.
+          - name: order_day_of_week
+            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”.
+          - name: order_day_of_month
+            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
+          - name: expire_after_specific_number_of_charges
+            description: Set the number of charges until subscription expires.
+          - name: number_charges_until_expiration
+            description: Number of charges until the subscription expires.
+          - name: updated_at
+            description: The date and time when the subscription was created.
