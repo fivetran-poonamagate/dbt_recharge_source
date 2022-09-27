@@ -8,7 +8,7 @@ sources:
     
     tables:
       - name: subscription
-        description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer recieves on a recurring basis.
+        description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer receives on a recurring basis.
         columns:
           - name: id
             description: The unique ID of the subscription.
@@ -65,7 +65,7 @@ sources:
           - name: id
             description: The unique ID of the product.
           - name: title
-            description: The product title retrived from Shopify.
+            description: The product title retrieved from Shopify.
           - name: discount_amount
             description: The discount amount applied on the product.
           - name: discount_type
@@ -77,7 +77,7 @@ sources:
           - name: medium_image
             description: A medium image file of the product.
           - name: original_image
-            description: The oringnal image file of the product.
+            description: The original image file of the product.
           - name: small_image
             description: A small image file of the product.
           - name: subscription_defaults_charge_interval_frequency
@@ -103,7 +103,7 @@ sources:
           - name: subscription_defaults_storefront_purchase_options
             description: Placeholder.
           - name: collection_id
-            description: Unique numeric identifier for the ruleset charge in Recharge.
+            description: Unique numeric identifier for the rule set charge in Recharge.
           - name: shopify_product_id
             description: Unique numeric identifier of the product in Shopify.
           - name: created_at
@@ -173,71 +173,71 @@ sources:
           - name: id 
             description: The unique ID of the charge.
           - name: address_id
-            descriptiom: The customer shipping address the charge is tied to.
+            description: The customer shipping address the charge is tied to.
           - name: customer_id
-            descriptiom: The ID of the customer associated with the charge.
+            description: The ID of the customer associated with the charge.
           - name: first_name
-            descriptiom: The first name of the customer.
+            description: The first name of the customer.
           - name: last_name
-            descriptiom: The last name of the customer.
+            description: The last name of the customer.
           - name: customer_hash
-            descriptiom: The hash of the customer associated with the charge.
+            description: The hash of the customer associated with the charge.
           - name: note
-            descriptiom: Shows the next order in sequence.
+            description: Shows the next order in sequence.
           - name: created_at
-            descriptiom: Date and time when the charge was created.
+            description: Date and time when the charge was created.
           - name: updated_at
-            descriptiom: Date and time when the charge was last updated.
+            description: Date and time when the charge was last updated.
           - name: processed_at
-            descriptiom: Date and time when the charge was processed.
+            description: Date and time when the charge was processed.
           - name: scheduled_at
-            descriptiom: When the charge processing will next be attempted.
+            description: When the charge processing will next be attempted.
           - name: shipments_count
-            descriptiom: The number of successful processed child orders on the charge.
+            description: The number of successful processed child orders on the charge.
           - name: shopify_order_id
-            descriptiom: The unique numeric identifier within Shopify for the charge.
+            description: The unique numeric identifier within Shopify for the charge.
           - name: sub_total
-            descriptiom: The item price without taxes and discounts. # Use subtotal_price instead
+            description: The item price without taxes and discounts. # Use subtotal_price instead
           - name: subtotal_price
-            descriptiom: The item price without taxes and shipping applied.
+            description: The item price without taxes and shipping applied.
           - name: tags
-            descriptiom: Array of strings used to distinguish specific charges.
+            description: Array of strings used to distinguish specific charges.
           - name: tax_lines
-            descriptiom: Array of strings used to distinguish specific charges - the price of the shipping line.
+            description: Array of strings used to distinguish specific charges - the price of the shipping line.
           - name: total_discounts
-            descriptiom: The sum of the discounts applied to the charge.
+            description: The sum of the discounts applied to the charge.
           - name: total_line_items_price
-            descriptiom: The sum of all the prices of all the items in the charge.
+            description: The sum of all the prices of all the items in the charge.
           - name: total_price
-            descriptiom: The sum of all the prices of all the items in the charge, taxes and discounts included (must be positive).
+            description: The sum of all the prices of all the items in the charge, taxes and discounts included (must be positive).
           - name: total_tax
-            descriptiom: The sum of all the prices of all the items in the charge, taxes included.
+            description: The sum of all the prices of all the items in the charge, taxes included.
           - name: total_weight
-            descriptiom: The total weight of all items in the charge.
+            description: The total weight of all items in the charge.
           - name: type
-            descriptiom: The type of the charge, possible values can be; checkout or recurring.
+            description: The type of the charge, possible values can be; checkout or recurring.
           - name: status
-            descriptiom: The status of the charge, possible values can be; success, error, queued, skipped, refunded or partially_refunded.
+            description: The status of the charge, possible values can be; success, error, queued, skipped, refunded or partially_refunded.
           - name: total_refunds
-            descriptiom: The sum of all refunds that were made on a specific charge.
+            description: The sum of all refunds that were made on a specific charge.
           - name: transaction_id
-            descriptiom: The unique alphanumeric identifier of the transaction.
+            description: The unique alphanumeric identifier of the transaction.
           - name: email
-            descriptiom: The email address of the customer.
+            description: The email address of the customer.
           - name: processor_name
-            descriptiom: The payment processor used on the charge.
-          - name: has_uncommited_changes
-            descriptiom: Specifies whether the charge is scheduled for regeneration (if the subscription is related to the charge was updated in the last 5 seconds using "commit_update":false).
+            description: The payment processor used on the charge.
+          - name: has_uncommitted_changes
+            description: Specifies whether the charge is scheduled for regeneration (if the subscription is related to the charge was updated in the last 5 seconds using "commit_update":false).
           - name: last_charge_attempt_date
-            descriptiom: The date when the charge was last attempted.
+            description: The date when the charge was last attempted.
           - name: retry_date
-            descriptiom: The date when the next attempt will be placed.
+            description: The date when the next attempt will be placed.
           - name: error_type
-            descriptiom: Structured reason why the charge failed such as customer_needs_to_udpated_card.
+            description: Structured reason why the charge failed such as customer_needs_to_updated_card.
           - name: error
-            descriptiom: Error reason as sentence text (typically returned directly from the payment processor - e.g. "customer needs to update credit card").
+            description: Error reason as sentence text (typically returned directly from the payment processor - e.g. "customer needs to update credit card").
           - name: number_times_tried
-            descriptiom: Shows how many times an attempt to charge was placed.
+            description: Shows how many times an attempt to charge was placed.
           - name: shopify_variant_id_not_found
             description: Indicates if Recharge was able to find the shopify_variant_id from the charge.
           - name: billing_address_first_name
@@ -284,3 +284,99 @@ sources:
             description: The IP address of the buyer detected in checkout.
           - name: client_details_user_agent
             description: The user agent detected during checkout.
+
+      - name: order
+        description: Table of all orders after a charge is successfully processed.
+        columns:
+          - name: id
+            description: The unique ID of the order.
+          - name: customer_id
+            description: The unique numeric identifier of the customer.
+          - name: address_id
+            description: The ID of the customer's shipping address that this order is tied to.
+          - name: charge_id
+            description: The unique numeric identifier of the charge.
+          - name: is_deleted
+            description: Boolean indicating if the order (record) is deleted.
+          - name: first_name
+            description: The first name of the customer.
+          - name: last_name
+            description: The last name of the customer.
+          - name: email
+            description: The email address of the customer.
+          - name: transaction_id
+            description: The unique alphanumeric identifier of the transaction.
+          - name: address_is_active
+            description: Indicates if the address is currently active, accepted values range from 0 = "No" and 1 = "Yes".
+          - name: charge_status
+            description: The status of the charge, possible values can be; success, error, queued, skipped, refunded or partially_refunded.
+          - name: is_prepaid
+            description: An order that has been paid for a pre-determined number of months, accepted values; 0 = "No" and 1 = "Yes".
+          - name: payment_processor
+            description: The type of payment the processor has chosen.
+          - name: status
+            description: The status of the order within Shopify.
+          - name: total_price
+            description: The sum of all prices of the item in the order with taxes and discounts included (must be positive).
+          - name: type
+            description: Shows if the order was made through checkout or if it's a recurring charge. Accepted inputs; "CHECKOUT" or "RECURRING".
+          - name: shopify_cart_token
+            description: Unique cart token generated by Shopify when an item is added to the cart.
+          - name: shopify_id
+            description: Unique numeric identifier within Shopify for the order. # Deprecated, use shopify_order_id instead
+          - name: shopify_order_id
+            description: Unique numeric identifier within Shopify for the order.
+          - name: shopify_order_number
+            description: The unique order number within Shopify.
+          - name: created_at
+            description: The date and time when the order was created.
+          - name: updated_at
+            description: The date and time when the order was last updated.
+          - name: processed_at
+            description: The date and time when the order was submitted. 
+          - name: scheduled_at
+            description: The date and time when the order will be shipped.
+          - name: shipped_date
+            description: The date when the order will be processed.
+          - name: shipping_date
+            description: The date when the order will be processed. # Deprecated, use scheduled_at instead
+          - name: billing_address_first_name
+            description: The first name of the billing address.
+          - name: billing_address_last_name
+            description: The last name of the billing address.
+          - name: billing_address_1
+            description: The first line of the billing address.
+          - name: billing_address_2
+            description: The second line of the billing address.
+          - name: billing_address_city
+            description: The city of the billing address.
+          - name: billing_address_province
+            description: The province or state name of the billing address.
+          - name: billing_address_country
+            description: The country of the billing address.
+          - name: billing_address_zip
+            description: The zip or post code of the billing address.
+          - name: billing_address_company
+            description: The name of the company associated with the billing address.
+          - name: billing_address_phone
+            description: The phone number of the billing address.
+          - name: shipping_address_first_name
+            description: The first name of the shipping address.
+          - name: shipping_address_last_name
+            description: The last name of the shipping address.
+          - name: shipping_address_address_1
+            description: The first line of the shipping address.
+          - name: shipping_address_address_2
+            description: The second line of the shipping address.
+          - name: shipping_address_city
+            description: The city of the shipping_address.
+          - name: shipping_address_province
+            description: The province or state name of the shipping address.
+          - name: shipping_address_country
+            description: The country of the shipping address.
+          - name: shipping_address_zip
+            description: The zip or post code of the shipping address.
+          - name: shipping_address_company
+            description: The name of the company associated with the shipping address.
+          - name: shipping_address_phone
+            description: The phone number of the billing address.
