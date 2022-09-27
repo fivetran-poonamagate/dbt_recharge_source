@@ -3,7 +3,7 @@ with order_cte as (
     select
         *
     from
-        {{ source('recharge','order_table') }}s
+        {{ source('recharge','order') }}
 )
 
 select
