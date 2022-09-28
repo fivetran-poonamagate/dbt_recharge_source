@@ -380,3 +380,45 @@ sources:
             description: The name of the company associated with the shipping address.
           - name: shipping_address_phone
             description: The phone number of the billing address.
+
+      - name: order_line_item
+        description: Table of all order line items. Each line containing information about an item in the order.
+        columns:
+          - name: order_id
+            description: The ID of the order.
+          - name: index
+            description: A unique numeric row produced for every concurrent order_id.
+          - name: subscription_id
+            description: The ID of the subscription tied to the purchase of the product.
+          - name: variant_title
+            description: The title of the product variant.
+          - name: title
+            description: The title of the product.
+          - name: quantity
+            description: The number of products that were purchased.
+          - name: grams
+            description: Weight in grams of the item.
+          - name: price
+            description: The price of the item in the order.
+          - name: sku
+            description: A unique identifier of the item in the fulfillment.
+          - name: shopify_product_id
+            description: The unique numeric identifier for the Shopify product in the fulfillment.
+          - name: shopify_variant_id
+            description: Unique numeric identifier of the product variant in Shopify.
+          - name: product_title
+            description: The name of the product in a shop's catalog. # Deprecated, use title instead
+          - name: property_charge_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each charge.
+          - name: property_shipping_interval_unit_type
+            description: The frequency unit type which an order should be shipped by. Valid values are “day”,“week”, and “month”.
+          - name: property_shipping_interval_frequency
+            description: Shipping interval frequency options that a customer can choose from.
+          - name: property_price
+            description: The same as price - the price of the item in the order.
+          - name: property_charge_interval_unit_type
+            description: The frequency unit type which an order should be charged by. Valid values are “day”,“week”, and “month”.
+          - name: property_type
+            description: The type of the product, if specified, e.g. CUSTOM_BUNDLE.
+          - name: property_title
+            description: The original name of the product.
