@@ -285,7 +285,7 @@ sources:
           - name: client_details_user_agent
             description: The user agent detected during checkout.
 
-      - name: order
+      - name: order_temp
         description: Table of all orders after a charge is successfully processed.
         columns:
           - name: id
