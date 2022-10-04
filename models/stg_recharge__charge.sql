@@ -79,4 +79,3 @@ select
     *
 from
     final
-*/
