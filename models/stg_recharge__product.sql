@@ -47,7 +47,7 @@ with base as (
         , is_deleted
         , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
     from
-        product
+        fields
 )
 
 select
