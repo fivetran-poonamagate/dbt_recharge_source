@@ -38,3 +38,4 @@ vars:
   recharge:
     subscription: "{{ source('recharge','subscription') }}"
     product: "{{ source('recharge','product') }}"
+    customer: "{{ source('recharge','customer') }}"

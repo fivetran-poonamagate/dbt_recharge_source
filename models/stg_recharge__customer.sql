@@ -1,21 +1,34 @@
 
-with customer as (
+with base as (
     select
         *
     from
-        {{ source('recharge','customer') }}
+        {{ ref('stg_recharge__customer_tmp') }}
 )
 
-select
+, fields as (
+    select
+        {{
+            fivetran_utils.fill_staging_columns(
+                source_columns = adapter.get_columns_in_relation(ref('stg_recharge__customer_tmp')),
+                staging_columns = get_customer_columns()
+            )
+        }}
+    from 
+        base
+)
+
+, final as (
+    select
     id as customer_id
     , hash
     , shopify_customer_id
     , email
     , first_name || ' ' || last_name as customer_full_name
-    , to_timestamp(created_at) as created_at
+    , cast(created_at as {{ dbt_utils.type_timestamp() }}) as created_at
     , status as customer_status
-    , to_timestamp(updated_at) as updated_at
-    , to_timestamp(first_charge_processed_at) as first_charge_processed_at
+    , cast(updated_at as {{ dbt_utils.type_timestamp() }}) as updated_at
+    , cast(first_charge_processed_at as {{ dbt_utils.type_timestamp() }}) as first_charge_processed_at
     , number_active_subscriptions as active_subscriptions
     , number_subscriptions as total_subscriptions
     , billing_first_name || ' ' || billing_last_name as customer_billing_full_name
@@ -31,5 +44,13 @@ select
     , has_valid_payment_method
     , reason_payment_method_not_valid
     , has_card_error_in_dunning
+    , _fivetran_deleted
+    , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
 from
-    customer
+    fields
+)
+
+select
+    *
+from
+    final

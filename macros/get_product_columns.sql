@@ -26,8 +26,8 @@
     {"name": "shopify_product_id", "datatype": dbt_utils.type_int()},
     {"name": "created_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "updated_at", "datatype": dbt_utils.type_timestamp()},
-    {"name": "is_deleted", "datatype": dbt_utils.type_int()},
-    {"name": "_fivetran_synced", "datatype": dbt_utils.type_timestamp()},
+    {"name": "is_deleted", "datatype": "boolean"},
+    {"name": "_fivetran_synced", "datatype": dbt_utils.type_timestamp()}
 ] %}
 
 {{ return(columns) }}
