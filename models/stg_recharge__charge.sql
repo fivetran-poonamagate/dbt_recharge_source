@@ -72,7 +72,7 @@ with base as (
         , client_details_user_agent
         , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
     from
-        charge
+        fields
 )
 
 select
