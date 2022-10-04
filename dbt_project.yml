@@ -30,6 +30,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   recharge:
-    # Config indicated by + and applies to all files under models/example/
-    staging:
-      +materialized: table
+    +materialized: table
+    tmp:
+      materialized: view
+
+vars:
+  recharge:
+    subscription: "{{ source('recharge','subscription') }}"
