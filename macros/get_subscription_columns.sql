@@ -8,7 +8,7 @@
     {"name": "created_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "cancelled_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "next_charge_scheduled_at", "datatype": dbt_utils.type_timestamp()},
-    {"name": "price", "datatype": dbt_utils.float()},
+    {"name": "price", "datatype": dbt_utils.type_float()},
     {"name": "quantity", "datatype": dbt_utils.type_int()},
     {"name": "cancellation_reason", "datatype": dbt_utils.type_string()},
     {"name": "status", "datatype": dbt_utils.type_string()},
