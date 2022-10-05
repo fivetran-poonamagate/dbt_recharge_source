@@ -285,6 +285,44 @@ sources:
           - name: client_details_user_agent
             description: The user agent detected during checkout.
 
+      - name: charge_line_item
+        description: Table of all charge line items, each containing information about a distinct purchase item.
+        columns:
+          - name: charge_id
+            description: The unique ID of the charge.
+          - name: index
+            description: A unique numeric row produced for every concurrent order_id.
+          - name: subscription_id
+            description: The unique ID of the associated subscription.
+          - name: variant_title
+            description: The name of the product variant.
+          - name: title
+            description: The product title retrieved from Shopify.
+          - name: quantity
+            description: The number of items associated to the subscription and therefore the subsequent charge.
+          - name: grams
+            description: The weight of the charge's line item in grams.
+          - name: price
+            description: The price of the charge's line item.
+          - name: sku
+            description: The SKU (stock keeping unit) of the product associated with the charge's line item.
+          - name: shopify_product_id
+            description: The product ID retrieved from Shopify.
+          - name: shopify_variant_id
+            description: The variant ID retrieved from Shopify.
+          - name: vendor
+            description: The name of the seller.
+          - name: property_charge_interval_frequency
+            description: The number of units, specified in order_interval_unit between each charge.
+          - name: property_shipping_interval_unit_type
+            description: The condition of how frequent the items are shipped.
+          - name: property_shipping_interval_frequency
+            description: The interval of how frequent the items are shipped.
+          - name: property_charge_interval_unit_type
+            description: The condition of how frequent the items are charged.
+          - name: property_title
+            description: The title of the product.
+
       - name: order_temp
         description: Table of all orders after a charge is successfully processed.
         columns:
