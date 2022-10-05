@@ -3,14 +3,14 @@ with base as (
     select
         *
     from
-        {{ ref('stg_recharge__charge_discount_code') }}
+        {{ ref('stg_recharge__charge_discount_code_tmp') }}
 )
 
 , fields as (
     select
         {{
             fivetran_utils.fill_staging_columns(
-                source_columns = adapter.get_columns_in_relation(ref('stg_recharge__charge_discount_code')),
+                source_columns = adapter.get_columns_in_relation(ref('stg_recharge__charge_discount_code_tmp')),
                 staging_columns = get_charge_discount_code_columns()
             )
         }}
@@ -20,7 +20,7 @@ with base as (
 
 , final as (
     select
-        id as charge_id
+        charge_id
         , index
         , discount_id
         , amount
