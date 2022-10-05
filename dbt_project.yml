@@ -39,6 +39,7 @@ vars:
     address: "{{ source('recharge','address') }}"
     address_shipping_line: "{{ source('recharge','address_shipping_line') }}"
     charge: "{{ source('recharge','charge') }}"
+    charge_discount_code: "{{ source('recharge','charge_discount_code') }}"
     charge_line_item: "{{ source('recharge','charge_line_item') }}"
     customer: "{{ source('recharge','customer') }}"
     order: "{{ source('recharge','order_temp') }}"
