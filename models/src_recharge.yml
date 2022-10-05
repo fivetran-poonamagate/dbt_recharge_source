@@ -456,7 +456,5 @@ sources:
             description: The same as price - the price of the item in the order.
           - name: property_charge_interval_unit_type
             description: The frequency unit type which an order should be charged by. Valid values are “day”,“week”, and “month”.
-          - name: property_type
-            description: The type of the product, if specified, e.g. CUSTOM_BUNDLE.
           - name: property_title
             description: The original name of the product.
