@@ -192,7 +192,7 @@ sources:
           - name: charge_id
             description: The unique ID of the charge.
           - name: index
-            description: A unique numeric row produced for every concurrent order_id.
+            description: A unique numeric row produced for every concurrent charge_id.
           - name: subscription_id
             description: The unique ID of the associated subscription.
           - name: variant_title
@@ -223,6 +223,16 @@ sources:
             description: The condition of how frequent the items are charged.
           - name: property_title
             description: The title of the product.
+
+      - name: charge_note_attribute
+        description: Table of notes associated to their corresponding charges.
+        columns:
+          - name: charge_id
+            description: The unique ID of the charge.
+          - name: index
+            description: A unique numeric row produced for every concurrent charge_id.
+          - name: note_attribute
+            description: An array of name-value pairs of order attributes on the charge. 
 
       - name: customer
         description: Table of all customer details holding account and billing information. Email is unique on the customer, no two customers for a store can have the same email.
