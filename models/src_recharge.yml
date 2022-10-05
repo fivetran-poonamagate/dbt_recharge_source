@@ -7,165 +7,40 @@ sources:
     schema: recharge
     
     tables:
-      - name: subscription
-        description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer receives on a recurring basis.
+
+      - name: address
+        description: Table of all addresses, an address record represents a shipping address.
         columns:
           - name: id
-            description: The unique ID of the subscription.
-          - name: address_id
-            description: Unique numeric identifier for the address the subscription is associated with.
+            description: Unique numeric identifier for the address.
           - name: customer_id
-            description: Unique numeric identifier for the customer the subscription is ties to.
-          - name: created_at
-            description: The date and time when the subscription was created.
-          - name: cancelled_at
-            description: The date and time when the subscription was cancelled.
-          - name: next_charge_scheduled_at
-            description: Date of the next charge for the subscription.
-          - name: price
-            description: The price of the item before discounts, taxes, or shipping have been applied.
-          - name: quantity
-            description: The number of items in the subscription.
-          - name: status
-            description: The status of the subscription; active = the subscription is active, cancelled = the subscription has been cancelled, expired = the subscription has expired - this occurs when the maximum number of charges for product have been reached.
-          - name: cancellation_reason
-            description: Reason provided for cancellation.
-          - name: cancellation_reason_comments
-            description: Additional comment for cancellation.
-          - name: product_title
-            description: The name of the product in a shop's catalog.
-          - name: variant_title
-            description: The name of the variant in a shop's catalog.
-          - name: shopify_product_id
-            description: Unique numeric identifier of the product in Shopify.
-          - name: shopify_variant_id
-            description: Unique numeric identifier of the product variant in Shopify.
-          - name: sku
-            description: A unique identifier of the item in fulfillment.
-          - name: order_interval_unit
-            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
-          - name: order_interval_frequency
-            description: The number of units (specified in order_interval_unit) between each order, e.g. order_interval_unit = 'month' and order_interval frequency = 3 indicates an order every 3 months.
-          - name: charge_interval_frequency
-            description: The number of units (specified in order_interval_unit) between each charge.
-          - name: order_day_of_week
-            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”.
-          - name: order_day_of_month
-            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
-          - name: expire_after_specific_number_of_charges
-            description: Set the number of charges until subscription expires.
-          - name: number_charges_until_expiration
-            description: Number of charges until the subscription expires.
-          - name: updated_at
-            description: The date and time when the subscription was created.
-
-      - name: product
-        description: Table of all products sold on the merchant's website.
-        columns:
-          - name: id
-            description: The unique ID of the product.
-          - name: title
-            description: The product title retrieved from Shopify.
-          - name: discount_amount
-            description: The discount amount applied on the product.
-          - name: discount_type
-            description: The type of discount.
-          - name: handle
-            description: A human-friendly unique string for the product automatically generated from Shopify.
-          - name: large_image
-            description: A large image file of the product.
-          - name: medium_image
-            description: A medium image file of the product.
-          - name: original_image
-            description: The original image file of the product.
-          - name: small_image
-            description: A small image file of the product.
-          - name: subscription_defaults_charge_interval_frequency
-            description: The number of units (specified in order_interval_unit) between each charge.
-          - name: subscription_defaults_cutoff_day_of_month
-            description: Number of day in month on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
-          - name: subscription_defaults_cutoff_day_of_week
-            description: Number of day in week on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
-          - name: subscription_defaults_expire_after_specific_number_of_charges
-            description: Number of charges until the subscription expires. # Will be expired, use expire_after_specific_number_of_charges instead.
-          - name: subscription_defaults_modifiable_properties
-            description: A list of modifiable line item properties (e.g. ["box-edition", "christmas-special"])
-          - name: subscription_defaults_number_charges_until_expiration
-            description: Number of charges until the subscription expires.
-          - name: subscription_defaults_order_day_of_month
-            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
-          - name: subscription_defaults_order_day_of_week
-            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”; value of 0 equals to Monday, 1 to Tuesday etc.
-          - name: subscription_defaults_order_interval_frequency_options
-            description: List of order interval frequency options that a customer can choose from (e.g. order_interval_unit = month and order_internal_frequency_option for 3 would be an order every 3 months).
-          - name: subscription_defaults_order_interval_unit
-            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
-          - name: subscription_defaults_storefront_purchase_options
-            description: Placeholder.
-          - name: collection_id
-            description: Unique numeric identifier for the rule set charge in Recharge.
-          - name: shopify_product_id
-            description: Unique numeric identifier of the product in Shopify.
-          - name: created_at
-            description: The date and time when the product was created.
-          - name: updated_at
-            description: The date and time when the product was updated.
-          - name: is_deleted
-            description: Boolean indicating if the product has been deleted.
-
-      - name: customer
-        description: Table of all customer details holding account and billing information. Email is unique on the customer, no two customers for a store can have the same email.
-        columns:
-          - name: id
-            description: The unique ID of the customer.
-          - name: hash
-            description: The unique string identifier used in a customer portal link.
-          - name: shopify_customer_id
-            description: Shopify's unique identifier for the customer.
-          - name: email
-            description: The email address of the customer.
-          - name: created_at
-            description: The date and time when the customer was created.
-          - name: updated_at
-            description: The date and time when the customer was last updated.
+            description: Unique numeric identifier for the customer associated with the address.
           - name: first_name
             description: The customer's first name.
           - name: last_name
             description: The customer's last name.
-          - name: number_active_subscriptions
-            description: The number of active subscriptions for the customer.
-          - name: number_subscriptions
-            description: The number of subscriptions the customer has.
-          - name: billing_first_name
-            description: The customer's billing first name. Required when creating a customer.
-          - name: billing_last_name
-            description: The customer's billing first name. Required when creating a customer.
-          - name: billing_address_1
-            description: The customer's billing address
-          - name: billing_address_2
-            description: An additional field for the customer's billing address.
-          - name: billing_zip
-            description: The customer's billing zip or post code.
-          - name: billing_city
-            description: The customer's billing city.
-          - name: billing_company
-            description: The customer's billing company.
-          - name: billing_province
-            description: The customer's billing province or state name.
-          - name: billing_country
-            description: The customer's billing country.
-          - name: billing_phone
-            description: The customer's billing phone.
-          - name: processor_type
-            description: What the merchant processor the customer is stored on.
-          - name: status
-            description: The customer's status - accepted values are active or inactive.
-          - name: has_valid_payment_method
-            description: Boolean indicating if the payment value is valid.
-          - name: reason_payment_method_not_valid
-            description: Field indicating why the payment method is not valid.
-          - name: has_card_error_in_dunning
-            description: Boolean indicating if the customer has a credit card in dunning.
+          - name: address_1
+            description: The street associated with the address.
+          - name: address_2
+            description: Any additional information associated with the address.
+          - name: city
+            description: The city associated with the address.
+          - name: province
+            description: The state or province associated with the address.
+          - name: country
+            description: The country associated with the address.
+          - name: zip
+            description: The zip or postal code associated with the address.
+          - name: company
+            description: The company associated with the address.
+          - name: phone
+            description: The phone number associated with the address.
+          - name: created_at
+            description: The date and time when the address was created.
+          - name: updated_at
+            description: The date and time when the address was last updated.
+          - name: cart_attribute_elevar_visitor_info
+            description: Contains visitor information about the customer such as their source.
 
       - name: charge
         description: Table of all charges (financial transactions) linked to the purchase of an item. A charge is linked to a corresponding order, an order is created once the corresponding charge is successful.
@@ -323,6 +198,60 @@ sources:
           - name: property_title
             description: The title of the product.
 
+      - name: customer
+        description: Table of all customer details holding account and billing information. Email is unique on the customer, no two customers for a store can have the same email.
+        columns:
+          - name: id
+            description: The unique ID of the customer.
+          - name: hash
+            description: The unique string identifier used in a customer portal link.
+          - name: shopify_customer_id
+            description: Shopify's unique identifier for the customer.
+          - name: email
+            description: The email address of the customer.
+          - name: created_at
+            description: The date and time when the customer was created.
+          - name: updated_at
+            description: The date and time when the customer was last updated.
+          - name: first_name
+            description: The customer's first name.
+          - name: last_name
+            description: The customer's last name.
+          - name: number_active_subscriptions
+            description: The number of active subscriptions for the customer.
+          - name: number_subscriptions
+            description: The number of subscriptions the customer has.
+          - name: billing_first_name
+            description: The customer's billing first name. Required when creating a customer.
+          - name: billing_last_name
+            description: The customer's billing first name. Required when creating a customer.
+          - name: billing_address_1
+            description: The customer's billing address
+          - name: billing_address_2
+            description: An additional field for the customer's billing address.
+          - name: billing_zip
+            description: The customer's billing zip or post code.
+          - name: billing_city
+            description: The customer's billing city.
+          - name: billing_company
+            description: The customer's billing company.
+          - name: billing_province
+            description: The customer's billing province or state name.
+          - name: billing_country
+            description: The customer's billing country.
+          - name: billing_phone
+            description: The customer's billing phone.
+          - name: processor_type
+            description: What the merchant processor the customer is stored on.
+          - name: status
+            description: The customer's status - accepted values are active or inactive.
+          - name: has_valid_payment_method
+            description: Boolean indicating if the payment value is valid.
+          - name: reason_payment_method_not_valid
+            description: Field indicating why the payment method is not valid.
+          - name: has_card_error_in_dunning
+            description: Boolean indicating if the customer has a credit card in dunning.
+
       - name: order_temp
         description: Table of all orders after a charge is successfully processed.
         columns:
@@ -458,3 +387,109 @@ sources:
             description: The frequency unit type which an order should be charged by. Valid values are “day”,“week”, and “month”.
           - name: property_title
             description: The original name of the product.
+
+      - name: product
+        description: Table of all products sold on the merchant's website.
+        columns:
+          - name: id
+            description: The unique ID of the product.
+          - name: title
+            description: The product title retrieved from Shopify.
+          - name: discount_amount
+            description: The discount amount applied on the product.
+          - name: discount_type
+            description: The type of discount.
+          - name: handle
+            description: A human-friendly unique string for the product automatically generated from Shopify.
+          - name: large_image
+            description: A large image file of the product.
+          - name: medium_image
+            description: A medium image file of the product.
+          - name: original_image
+            description: The original image file of the product.
+          - name: small_image
+            description: A small image file of the product.
+          - name: subscription_defaults_charge_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each charge.
+          - name: subscription_defaults_cutoff_day_of_month
+            description: Number of day in month on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+          - name: subscription_defaults_cutoff_day_of_week
+            description: Number of day in week on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+          - name: subscription_defaults_expire_after_specific_number_of_charges
+            description: Number of charges until the subscription expires. # Will be expired, use expire_after_specific_number_of_charges instead.
+          - name: subscription_defaults_modifiable_properties
+            description: A list of modifiable line item properties (e.g. ["box-edition", "christmas-special"])
+          - name: subscription_defaults_number_charges_until_expiration
+            description: Number of charges until the subscription expires.
+          - name: subscription_defaults_order_day_of_month
+            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
+          - name: subscription_defaults_order_day_of_week
+            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”; value of 0 equals to Monday, 1 to Tuesday etc.
+          - name: subscription_defaults_order_interval_frequency_options
+            description: List of order interval frequency options that a customer can choose from (e.g. order_interval_unit = month and order_internal_frequency_option for 3 would be an order every 3 months).
+          - name: subscription_defaults_order_interval_unit
+            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+          - name: subscription_defaults_storefront_purchase_options
+            description: Placeholder.
+          - name: collection_id
+            description: Unique numeric identifier for the rule set charge in Recharge.
+          - name: shopify_product_id
+            description: Unique numeric identifier of the product in Shopify.
+          - name: created_at
+            description: The date and time when the product was created.
+          - name: updated_at
+            description: The date and time when the product was updated.
+          - name: is_deleted
+            description: Boolean indicating if the product has been deleted.
+
+      - name: subscription
+        description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer receives on a recurring basis.
+        columns:
+          - name: id
+            description: The unique ID of the subscription.
+          - name: address_id
+            description: Unique numeric identifier for the address the subscription is associated with.
+          - name: customer_id
+            description: Unique numeric identifier for the customer the subscription is ties to.
+          - name: created_at
+            description: The date and time when the subscription was created.
+          - name: cancelled_at
+            description: The date and time when the subscription was cancelled.
+          - name: next_charge_scheduled_at
+            description: Date of the next charge for the subscription.
+          - name: price
+            description: The price of the item before discounts, taxes, or shipping have been applied.
+          - name: quantity
+            description: The number of items in the subscription.
+          - name: status
+            description: The status of the subscription; active = the subscription is active, cancelled = the subscription has been cancelled, expired = the subscription has expired - this occurs when the maximum number of charges for product have been reached.
+          - name: cancellation_reason
+            description: Reason provided for cancellation.
+          - name: cancellation_reason_comments
+            description: Additional comment for cancellation.
+          - name: product_title
+            description: The name of the product in a shop's catalog.
+          - name: variant_title
+            description: The name of the variant in a shop's catalog.
+          - name: shopify_product_id
+            description: Unique numeric identifier of the product in Shopify.
+          - name: shopify_variant_id
+            description: Unique numeric identifier of the product variant in Shopify.
+          - name: sku
+            description: A unique identifier of the item in fulfillment.
+          - name: order_interval_unit
+            description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+          - name: order_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each order, e.g. order_interval_unit = 'month' and order_interval frequency = 3 indicates an order every 3 months.
+          - name: charge_interval_frequency
+            description: The number of units (specified in order_interval_unit) between each charge.
+          - name: order_day_of_week
+            description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”.
+          - name: order_day_of_month
+            description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
+          - name: expire_after_specific_number_of_charges
+            description: Set the number of charges until subscription expires.
+          - name: number_charges_until_expiration
+            description: Number of charges until the subscription expires.
+          - name: updated_at
+            description: The date and time when the subscription was created.
