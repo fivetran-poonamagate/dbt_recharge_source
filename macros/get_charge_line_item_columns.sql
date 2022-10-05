@@ -19,7 +19,6 @@
     {"name": "property_shipping_interval_frequency", "datatype": dbt_utils.type_int()},
     {"name": "_fivetran_synced", "datatype": dbt_utils.type_timestamp()},
     {"name": "property_charge_interval_unit_type", "datatype": dbt_utils.type_string()},
-    {"name": "property_charge_interval_unit_type", "datatype": dbt_utils.type_string()},
     {"name": "property_title", "datatype": dbt_utils.type_string()}
 ] %}
 
