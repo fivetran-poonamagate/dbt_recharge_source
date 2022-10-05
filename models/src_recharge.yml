@@ -42,6 +42,20 @@ sources:
           - name: cart_attribute_elevar_visitor_info
             description: Contains visitor information about the customer such as their source.
 
+      - name: address_shipping_line
+        description: Table of all addresses and their associated shipping information.
+        columns:
+          - name: address_id
+            description: Unique numeric identifier for the address.
+          - name: index
+            description: A unique numeric row produced for every concurrent order_id.
+          - name: price
+            description: The price of the shipping amount.
+          - name: code
+            description: The type of the shipping, can contain geographical shipping information. 
+          - name: title
+            description: The type of shipping consignment.
+
       - name: charge
         description: Table of all charges (financial transactions) linked to the purchase of an item. A charge is linked to a corresponding order, an order is created once the corresponding charge is successful.
         columns:
