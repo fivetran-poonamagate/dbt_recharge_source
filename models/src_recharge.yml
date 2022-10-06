@@ -234,6 +234,20 @@ sources:
           - name: note_attribute
             description: An array of name-value pairs of order attributes on the charge.
 
+      - name: charge_shipping_line
+        description: xxx
+        columns:
+          - name: charge_id
+            description: The unique ID of the charge.
+          - name: index
+            description: A unique numeric row produced for every concurrent charge_id.
+          - name: price
+            description: The price of th shipping line of a charge.
+          - name: code
+            description: The code associated with the shipping line of a charge.
+          - name: title
+            description: The title of the shipping line.
+
       - name: checkout
         description: Table of all checkouts to manage recurring orders, billing and payments, only available for BigCommerce and Custom. Checkouts on Shopify must go through Shopify.
         columns:
