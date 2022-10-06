@@ -465,7 +465,48 @@ sources:
           - name: has_card_error_in_dunning
             description: Boolean indicating if the customer has a credit card in dunning.
 
-        
+      - name: discount
+        description: Table of discounts that can be applied to a checkout, or that can be directly applied to an address.
+        columns:
+          - name: id
+            description: Unique numeric identifier for the discount in Recharge.
+          - name: created_at
+            description: The date and time when the discount was created.
+          - name: updated_at
+            description: The date and time when the discount was last updated.
+          - name: starts_at
+            description: The date when the discount becomes active.
+          - name: ends_at
+            description: The expiration time of the discount, past this time the discount can no longer be redeemed, once the time of the discount has passed the status of the discount will go from 'active' to 'disabled'.
+          - name: code
+            description: The code used to apply the discount.
+          - name: value
+            description: The discounted value to be applied.
+          - name: discount_type
+            description: The type of discount.
+          - name: status
+            description: The status of the discount, accepted values - enabled, disabled, fully_disabled.
+          - name: times_used
+            description: An integer indicating how many times the discount has been used.
+          - name: usage_limit
+            description: An integer indicating how many times the discount can been used.
+          - name: applies_to
+            description: Indicates where the discount applies.
+          - name: applies_to_resource
+            description: An indicator of the type of resource which applies_to_id refers.
+          - name: applies_to_id
+            description: A list of ids of the type indicated in applies_to_resource for which the discount can be applied.
+          - name: applies_to_product_type
+            description: Indicates which product types the discount applies to.
+          - name: duration
+            description: How long the discount can be used.
+          - name: duration_usage_limit
+            description: An integer of how long the discount can be used in accordance to it's duration.
+          - name: minimum_order_amount
+          - name: once_per_customer
+            description: Boolean indicating whether the discount applies only once to a customer.
+          - name: applies_once
+            description: Boolean indicating whether the discount applies only once.
 
       - name: order_temp
         description: Table of all orders after a charge is successfully processed.

@@ -19,16 +19,16 @@ with base as (
 )
 
 , final as (
-select
-    address_id
-    , index
-    , price
-    , code
-    , title
-    , _fivetran_deleted
-    , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
-from
-    fields
+    select
+        address_id
+        , index
+        , price
+        , code
+        , title
+        , _fivetran_deleted
+        , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
+    from
+        fields
 )
 
 select

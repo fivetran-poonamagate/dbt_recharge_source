@@ -45,6 +45,7 @@ vars:
     checkout: "{{ source('recharge','checkout') }}"
     checkout_line_item: "{{ source('recharge','checkout_line_item') }}"
     customer: "{{ source('recharge','customer') }}"
+    discount: "{{ source('recharge','discount') }}"
     order: "{{ source('recharge','order_temp') }}"
     order_line_item: "{{ source('recharge','order_line_item') }}"
     product: "{{ source('recharge','product') }}"
