@@ -347,6 +347,69 @@ sources:
             description: Array of list name-value pairs for custom attributes.
 
       - name: checkout_line_item
+        description: Table of all line items to their associated checkout.
+        columns:
+          - name: checkout_token
+            description: Unique ID for the checkout.
+          - name: index
+            description: A unique numeric row produced for every concurrent charge_id.
+          - name: product_id
+            description: An object containing the associated product ID as it appears in the external system.
+          - name: variant_id
+            description: An object containing the associated variant ID as it appears in the external system.
+          - name: image
+            description: An object containing URLS of the product image.
+          - name: title
+            description: The title of the product associated with the line item.
+          - name: type
+            description: The type of the product associated with the line item.
+          - name: variant_title
+            description: The title of the product variant associated with the line item.
+          - name: vendor
+            description: The seller of the products.
+          - name: taxable
+            description: Boolean indicating if the line item is taxable.
+          - name: requires_shipping
+            description: Boolean indicating whether or not the line item requires shipping.
+          - name: sku
+            description: The sku (stock keeping unit) of the product associated with the line item.
+          - name: tax_code
+          - name: cutoff_day_of_month
+            description: Day of the month the plan should be charged.
+          - name: cutoff_day_of_week
+            description: Day of the week the plan should be charged.
+          - name: expire_after_specific_number_of_charges
+            description: A maximum number of charges on which the subscription should appear before automatic cancellation.
+          - name: first_recurring_charge_delay
+          - name: fulfillment_service
+          - name: grams
+            description: The weight of the line item.
+          - name: quantity
+            description: The quantity of the item being purchased.
+          - name: charge_interval_frequency
+            description: Frequency at which the subscriber will be charged.
+          - name: order_interval_frequency
+            description: Frequency at which the subscriber will receive shipments on their plan.
+          - name: line_price
+            description: The price of a single unit of the Product associated with the line item.
+          - name: order_day_of_month
+            description: Day of month an order should be generated when a customer is subscribed.
+          - name: order_day_of_week
+            description: Day of week an order should be generated when a customer is subscribed.
+          - name: order_interval_unit
+            description: The unit applied to order_interval_frequency.
+          - name: order_interval_type
+            description: The unit applied to order_interval_frequency.
+          - name: original_price
+            description: The original price of the line item.
+          - name: price
+            description: The total price of the line item.
+          - name: product_type
+            description: The type of the product associated with the line item.
+          - name: recurring_price
+            description: The recurring price that the subscriber will be charged.
+          - name: properties
+            description: Array of custom information associated with the line item.
 
       - name: customer
         description: Table of all customer details holding account and billing information. Email is unique on the customer, no two customers for a store can have the same email.
@@ -401,6 +464,8 @@ sources:
             description: Field indicating why the payment method is not valid.
           - name: has_card_error_in_dunning
             description: Boolean indicating if the customer has a credit card in dunning.
+
+        
 
       - name: order_temp
         description: Table of all orders after a charge is successfully processed.
