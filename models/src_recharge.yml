@@ -5,9 +5,11 @@ sources:
     description: Subscriptions payments platform designed for merchants to set up and manage dynamic recurring billing across web and mobile.
     database: dev_fivetran
     schema: recharge
+
+    loader: fivetran
+    loaded_at_field: _fivetran_synced
     
     tables:
-
       - name: address
         description: Table of all addresses, an address record represents a shipping address.
         columns:
@@ -48,7 +50,7 @@ sources:
           - name: address_id
             description: Unique numeric identifier for the address.
           - name: index
-            description: A unique numeric row produced for every concurrent order_id.
+            description: A unique numeric row produced for every concurrent address_id.
           - name: price
             description: The price of the shipping amount.
           - name: code
@@ -366,7 +368,7 @@ sources:
           - name: checkout_token
             description: Unique ID for the checkout.
           - name: index
-            description: A unique numeric row produced for every concurrent charge_id.
+            description: A unique numeric row produced for every concurrent checkout_id.
           - name: product_id
             description: An object containing the associated product ID as it appears in the external system.
           - name: variant_id
@@ -691,6 +693,56 @@ sources:
             description: The frequency unit type which an order should be charged by. Valid values are “day”,“week”, and “month”.
           - name: property_title
             description: The original name of the product.
+
+      - name: payment_source
+        description: Table of payment and billing information.
+        columns:
+          - name: customer_id
+            description: The unique ID of the customer.
+          - name: index
+            description: A unique numeric row produced for every concurrent customer_id.
+          - name: billing_address_first_name
+            description: The first name associated with the billing address.
+          - name: billing_address_last_name
+            description: The last name associated with the billing address.
+          - name: billing_address_address_1
+            description: The first line of the billing address.
+          - name: billing_address_address_2
+            description: Additional information associated with the billing address.
+          - name: billing_address_city
+            description: The city associated with the billing address.
+          - name: billing_address_province
+            description: The state name or province associated with the billing address.
+          - name: billing_address_country
+            description: The country associated with the billing address.
+          - name: billing_address_zip
+            description: The zip or post code associated with the billing address.
+          - name: billing_address_company
+            description: The company name associated with the billing address.
+          - name: billing_address_phone
+            description: The phone number associated with the billing address.
+          - name: cardholder_name
+            description: The name of the card holder.
+          - name: card_brand
+            description: The brand of the card.
+          - name: card_exp_month
+            description: The card expiry month.
+          - name: card_exp_year
+            description: The card expiry year.
+          - name: card_last_4
+            description: The last 4 digits of the identifier.
+          - name: has_card_error_in_dunning
+            description: Boolean indicating if the customer has a credit card in dunning.
+          - name: payment_token
+            description: The customer token at the processor.
+          - name: payment_type
+            description: The type of payment this is.
+          - name: processor_name
+            description: Possible values - stripe, braintree, authorize, shopify_payments, mollie.
+          - name: status
+            description: State of the payment method.
+          - name: status_reason
+            description: The status reason for the payment method.
 
       - name: product
         description: Table of all products sold on the merchant's website.

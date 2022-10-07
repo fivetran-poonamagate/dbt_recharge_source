@@ -50,5 +50,6 @@ vars:
     one_time_product: "{{ source('recharge','one_time_product') }}"
     order: "{{ source('recharge','order_temp') }}"
     order_line_item: "{{ source('recharge','order_line_item') }}"
+    payment_source: "{{ source('recharge','payment_source') }}"
     product: "{{ source('recharge','product') }}"
     subscription: "{{ source('recharge','subscription') }}"
