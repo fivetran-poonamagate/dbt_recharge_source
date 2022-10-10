@@ -23,8 +23,8 @@ with base as (
         id as address_id
         , customer_id
         , first_name || ' ' || last_name as customer_full_name
-        , address_1
-        , address_2
+        , address_1 as address_line_1
+        , address_2 as address_line_2
         , city
         , province
         , zip
