@@ -183,9 +183,9 @@ sources:
           - name: charge_id
             description: The unique ID of the charge.
           - name: index
-            description: A unique numeric row produced for every concurrent order_id.
+            description: A unique numeric row produced for every concurrent charge_id.
           - name: discount_id
-            description: The ID of the discount amount.
+            description: The ID of the discount associated with the charge.
           - name: amount
             description: The amount of the discount.
 

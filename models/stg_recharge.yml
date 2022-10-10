@@ -193,3 +193,73 @@ models:
         description: The user agent detected during checkout.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__charge_discount_code
+    description: Table of all charge discount codes.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - charge_id
+            - index
+
+    columns:
+      - name: charge_id
+        description: The unique ID of the charge.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent charge_id.
+      - name: discount_id
+        description: The ID of the discount associated to the charge.
+      - name: amount
+        description: The amount of the discount.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__charge_line_item
+    description: Table of all charge line items, each containing information about a distinct purchase item.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - charge_id
+            - index
+
+    columns:
+      - name: charge_id
+        description: The unique ID of the charge.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent charge_id.
+      - name: subscription_id
+        description: The unique ID of the associated subscription.
+      - name: vendor
+        description: The name of the seller.
+      - name: title
+        description: The product title retrieved from Shopify.
+      - name: title_v2
+        description: The title of the product.
+      - name: variant_title
+        description: The name of the product variant.
+      - name: sku
+        description: The SKU (stock keeping unit) of the product associated with the charge's line item.
+      - name: grams
+        description: The weight of the charge's line item in grams.
+      - name: quantity
+        description: The number of items associated to the subscription and therefore the subsequent charge.
+      - name: price
+        description: The price of the charge's line item.
+      - name: shopify_product_id
+        description: The product ID retrieved from Shopify.
+      - name: shopify_variant_id
+        description: The variant ID retrieved from Shopify.
+      - name: charge_interval_frequency
+        description: The number of units, specified in order_interval_unit between each charge.
+      - name: charge_interval_unit
+        description: The condition of how frequent the items are charged.
+      - name: shipping_interval_frequency
+        description: The interval of how frequent the items are shipped.
+      - name: shipping_interval_unit
+        description: The condition of how frequent the items are shipped.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
