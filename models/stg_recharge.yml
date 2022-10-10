@@ -1,0 +1,46 @@
+
+version: 2
+
+models:
+  - name: stg_recharge__address
+    description: Table of all addresses, an address represents a shipping address. Each customer can have multiple addresses, subscriptions are a child object of an address.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - address_id
+
+    columns:
+      - name: address_id
+        description: The unique ID of the address.
+        tests:
+          - not_null
+      - name: customer_id
+        description: Unique numeric identifier for the customer associated with the address.
+      - name: customer_full_name
+        description: The full name of the customer.
+      - name: address_1
+        description: The first line of the customer's address.
+      - name: address_2
+        description: Any additional address information associated with the customer.
+      - name: city
+        description: The city associated with the customer.
+      - name: province
+        description: The province or state name associated with the customer.
+      - name: zip
+        description: The zip or post code associated with the customer.
+      - name: country
+        description: The country associated with the customer.
+      - name: company
+        description: The company name associated with the customer.
+      - name: phone
+        description: The phone number associated with the customer.
+      - name: created_at
+        description: The date and time the customer address was recorded.
+      - name: updated_at
+        description: The date and time of when the customer's address record was last updated.
+      - name: _fivetran_deleted
+        description: Boolean indicating if a row have been deleted in the source.
+      - name: customer_visitor_info
+        description: Custom field to record additional customer information such as where they visited the vendor's website.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
