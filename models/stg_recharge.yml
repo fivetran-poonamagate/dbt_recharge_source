@@ -263,3 +263,47 @@ models:
         description: The condition of how frequent the items are shipped.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__charge_note_attribute
+    description: Table of notes associated to their corresponding charges.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - charge_id
+            - index
+    
+    columns:
+      - name: charge_id
+        description: The unique ID of the charge.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent charge_id.
+      - name: note_attribute
+        description: An array of name-value pairs of order attributes on the charge.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__charge_shipping_line
+    description: Table of all shipping information associated to their corresponding charges.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - charge_id
+            - index
+    
+    columns:
+      - name: charge_id
+        description: The unique ID of the charge.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent charge_id.
+      - name: price
+        description: The price of th shipping line of a charge.
+      - name: code
+        description: The code associated with the shipping line of a charge.
+      - name: title
+        description: The title of the shipping line.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.

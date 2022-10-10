@@ -199,7 +199,7 @@ sources:
           - name: subscription_id
             description: The unique ID of the associated subscription.
           - name: variant_title
-            description: The name of the product variant.
+            description: The name of the product variant retrieved from Shopify.
           - name: title
             description: The product title retrieved from Shopify.
           - name: quantity
