@@ -48,6 +48,7 @@ with base as (
         , cancellation_reason
         , cancellation_reason_comments
         , _fivetran_deleted
+        , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
     from
 fields
 )
