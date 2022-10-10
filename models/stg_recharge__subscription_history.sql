@@ -40,7 +40,7 @@ with base as (
         , order_day_of_week
         , property_shipping_interval_unit_type as shipping_interval_unit_type
         , property_shipping_interval_frequency as shipping_interval_frequency
-        , expire_after_sepcific_number_of_charges
+        , expire_after_specific_number_of_charges
         , number_charges_until_expiration
         , cast(updated_at as {{ dbt_utils.type_timestamp() }}) as updated_at
         , cast(next_charge_scheduled_at as {{ dbt_utils.type_timestamp() }}) as next_charge_scheduled_at
