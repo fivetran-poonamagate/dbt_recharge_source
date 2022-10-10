@@ -849,3 +849,9 @@ sources:
             description: Number of charges until the subscription expires.
           - name: updated_at
             description: The date and time when the subscription was created.
+
+      - name: subscription_history
+        description: History table that builds over time. Does not capture history prior to connecting Fivetran.
+        columns:
+          - name: subscription_id
+            description: Unique numeric identifier for the subscription.

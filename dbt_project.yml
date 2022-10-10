@@ -53,3 +53,4 @@ vars:
     payment_source: "{{ source('recharge','payment_source') }}"
     product: "{{ source('recharge','product') }}"
     subscription: "{{ source('recharge','subscription') }}"
+    subscription_history: "{{ source('recharge','subscription_history') }}"
