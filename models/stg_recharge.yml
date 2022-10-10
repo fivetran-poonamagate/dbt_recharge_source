@@ -6,8 +6,8 @@ models:
     description: Table of all addresses, an address represents a shipping address. Each customer can have multiple addresses, subscriptions are a child object of an address.
     tests:
       - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - address_id
+          combination_of_columns:
+            - address_id
 
     columns:
       - name: address_id
@@ -18,9 +18,13 @@ models:
         description: Unique numeric identifier for the customer associated with the address.
       - name: customer_full_name
         description: The full name of the customer.
-      - name: address_1
+      - name: created_at
+        description: The date and time the customer address was recorded.
+      - name: updated_at
+        description: The date and time of when the customer's address record was last updated.
+      - name: address_line_1
         description: The first line of the customer's address.
-      - name: address_2
+      - name: address_line_1
         description: Any additional address information associated with the customer.
       - name: city
         description: The city associated with the customer.
@@ -34,13 +38,158 @@ models:
         description: The company name associated with the customer.
       - name: phone
         description: The phone number associated with the customer.
-      - name: created_at
-        description: The date and time the customer address was recorded.
-      - name: updated_at
-        description: The date and time of when the customer's address record was last updated.
-      - name: _fivetran_deleted
-        description: Boolean indicating if a row have been deleted in the source.
       - name: customer_visitor_info
         description: Custom field to record additional customer information such as where they visited the vendor's website.
+      - name: _fivetran_deleted
+        description: Boolean indicating if a row have been deleted in the source.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__address_shipping_line
+    description: Table of all addresses and corresponding associated shipping information.
+    tests:
+     - dbt_utils.unique_combination_of_columns:
+        combination_of_columns:
+          - address_id
+          - index
+
+    columns:
+      - name: address_id
+        description: The unique ID of the address.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent address_id.
+      - name: price
+        description: The price of the shipping amount.
+      - name: code
+        description: The type of the shipping, can contain geographical shipping information. 
+      - name: title
+        description: The type of shipping consignment.
+      - name: _fivetran_deleted
+        description: Boolean indicating if a row have been deleted in the source.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__charge
+    description: Table of all charges (financial transactions) linked to the purchase of an item. A charge is linked to a corresponding order, an order is created once the corresponding charge is successful.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - charge_id
+
+    columns:
+      - name: charge_id
+        description: The unique ID of the charge.
+        tests:
+          - not_null
+      - name: customer_id
+        description: The ID of the customer associated with the charge.
+      - name: customer_hash
+        description: The hash of the customer associated with the charge.
+      - name: customer_full_name
+        description: The full name of the customer.
+      - name: email
+        description: The hash of the customer associated with the charge.
+      - name: created_at
+        description: Date and time when the charge was created.
+      - name: charge_type
+        description: The type of the charge, possible values can be; checkout or recurring.
+        tests:
+          - accepted_values:
+              values: ['CHECKOUT','RECURRING']
+              config:
+                severity: warn
+      - name: charge_status
+        description: The status of the charge, possible values can be; success, error, queued, skipped, refunded or partially_refunded.
+        tests:
+          - accepted_values:
+              values: ['SUCCESS','ERROR','QUEUED','SKIPPED','REFUNDED','PARTIALLY_REFUNDED','PENDING_MANUAL_PAYMENT','PENDING']
+              config:
+                severity: warn
+      - name: updated_at
+        description: Date and time when the charge was last updated.
+      - name: note
+        description: Shows the next order in sequence.
+      - name: subtotal_price
+        description: The item price without taxes and shipping applied.
+      - name: tax_lines
+        description: Array of strings used to distinguish specific charges - the price of the shipping line.
+      - name: total_discounts
+        description: The sum of the discounts applied to the charge.
+      - name: total_line_items_price
+        description: The sum of all the prices of all the items in the charge.
+      - name: total_tax
+        description: The sum of all the prices of all the items in the charge, taxes included.
+      - name: total_price
+        description: The sum of all the prices of all the items in the charge, taxes and discounts included (must be positive).
+      - name: total_refunds
+        description: The sum of all refunds that were made on a specific charge.
+      - name: total_weight
+        description: The total weight of all items in the charge.
+      - name: scheduled_at
+        description: When the charge processing will next be attempted.
+      - name: processed_at
+        description: Date and time when the charge was processed.
+      - name: processor_name
+        description: The payment processor used on the charge.
+      - name: transaction_id
+        description: The unique alphanumeric identifier of the transaction.
+      - name: shopify_order_id
+        description: The unique numeric identifier within Shopify for the charge.
+      - name: shipments_count
+        description: The number of successful processed child orders on the charge.
+      - name: has_uncommitted_changes
+        description: Specifies whether the charge is scheduled for regeneration (if the subscription is related to the charge was updated in the last 5 seconds using "commit_update":false).
+      - name: last_charge_attempt_date
+        description: The date when the charge was last attempted.
+      - name: retry_date
+        description: The date when the next attempt will be placed.
+      - name: error_type
+        description: Structured reason why the charge failed such as customer_needs_to_updated_card.
+      - name: times_retried
+        description: Shows how many times an attempt to charge was placed.
+      - name: address_id
+        description: The customer shipping address the charge is tied to.
+      - name: billing_address_full_name
+        description: The full name of the billing address.
+      - name: billing_address_line_1
+        description: Line 1 of the billing address.
+      - name: billing_address_line_2
+        description: Line 2 of the billing address.
+      - name: billing_address_city
+        description: The city of the billing address.
+      - name: billing_address_province
+        description: The province or state name associated with the billing address.
+      - name: billing_address_zip
+        description: The zip or post code of the billing address.
+      - name: billing_address_country
+        description: The country of the billing address.
+      - name: billing_address_company
+        description: The company name of the billing address.
+      - name: billing_address_phone
+        description: The phone number of the billing address.
+      - name: shipping_address_full_name
+        description: The full name of the shipping address.
+      - name: shipping_address_line_1
+        description: Line 1 of the shipping address.
+      - name: shipping_address_line_2
+        description: Line 2 of the shipping address.
+      - name: shipping_address_city
+        description: The city of the shipping address.
+      - name: shipping_address_province
+        description: The name of the province or state associated with the shipping address.
+      - name: shipping_address_zip
+        description: The zip or post code of the shipping address.
+      - name: shipping_address_country
+        description: The country of the shipping address.
+      - name: shipping_address_company
+        description: The company name of the shipping address.
+      - name: shipping_address_phone
+        description: The phone number of the shipping address.
+      - name: client_details_browser_ip
+        description: The IP address of the buyer detected in checkout.
+      - name: client_details_user_agent
+        description: The user agent detected during checkout.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.

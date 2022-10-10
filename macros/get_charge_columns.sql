@@ -30,7 +30,7 @@
     {"name": "transaction_id", "datatype": dbt_utils.type_string()},
     {"name": "email", "datatype": dbt_utils.type_string()},
     {"name": "processor_name", "datatype": dbt_utils.type_string()},
-    {"name": "has_uncommited_changes", "datatype": "boolean"},
+    {"name": "has_uncommitted_changes", "datatype": "boolean"},
     {"name": "last_charge_attempt_date", "datatype": dbt_utils.type_timestamp()},
     {"name": "retry_date", "datatype": dbt_utils.type_timestamp()},
     {"name": "error_type", "datatype": dbt_utils.type_string()},

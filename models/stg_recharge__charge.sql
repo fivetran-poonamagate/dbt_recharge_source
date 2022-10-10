@@ -44,7 +44,7 @@ with base as (
         , transaction_id
         , shopify_order_id
         , shipments_count
-        , has_uncommited_changes
+        , has_uncommitted_changes
         , cast(last_charge_attempt_date as {{ dbt_utils.type_timestamp() }}) as last_charge_attempt_date
         , cast(retry_date as {{ dbt_utils.type_timestamp() }}) as retry_date
         , error_type
