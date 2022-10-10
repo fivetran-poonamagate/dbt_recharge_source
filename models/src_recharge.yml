@@ -46,7 +46,7 @@ sources:
             description: Contains visitor information about the customer such as their source.
 
       - name: address_shipping_line
-        description: Table of all addresses and their associated shipping information.
+        description: Table of all addresses and corresponding associated shipping information.
         columns:
           - name: address_id
             description: Unique numeric identifier for the address.
