@@ -2,7 +2,7 @@
 {% macro get_subscription_history_columns() %}
 
 {% set columns = [
-    {"name": "subscription_history", "datatype": dbt_utils.type_int()},
+    {"name": "subscription_id", "datatype": dbt_utils.type_int()},
     {"name": "updated_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "address_id", "datatype": dbt_utils.type_int()},
     {"name": "customer_id", "datatype": dbt_utils.type_int()},
