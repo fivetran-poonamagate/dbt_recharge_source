@@ -11,7 +11,7 @@ with base as (
         {{
             fivetran_utils.fill_staging_columns(
                 source_columns = adapter.get_columns_in_relation(ref('stg_recharge__address_shipping_line_tmp')),
-                staging_columns = get_address_columns()
+                staging_columns = get_address_shipping_line_columns()
             )
         }}
     from 
