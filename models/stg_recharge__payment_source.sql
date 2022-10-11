@@ -33,8 +33,7 @@ with base as (
         , card_exp_year
         , card_last_4
         , has_card_error_in_dunning
-        , billing_address_first_name
-        , billing_address_last_name
+        , billing_address_first_name || ' ' || billing_address_last_name as billing_address_full_name
         , billing_address_address_1 as billing_address_line1
         , billing_address_address_2 as billing_address_line2
         , billing_address_city as billing_address_city
