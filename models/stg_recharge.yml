@@ -642,3 +642,51 @@ models:
         description: Boolean indicating whether the discount applies only once.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__one_time_product
+    description: Table of all one-times which represent non-recurring line items on a queued charges.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - one_time_product_id
+
+    columns:
+      - name: one_time_product_id
+        description: The unique numeric identifier for the onetime purchase.
+        tests:
+          - not_null
+      - name: address_id
+        description: Unique numeric identifier for the address the onetime purchase is associated with (cannot be used with next_charge_scheduled_at).
+      - name: customer_id
+        description: Unique numeric identifier for the customer the onetime purchase is tied to.
+      - name: is_deleted
+        description: Boolean indicating if the onetime is deleted.
+      - name: created_at
+        description: The time the onetime item was first created.
+      - name: updated_at
+        description: The time the onetime item was last updated.
+      - name: next_charge_scheduled_at
+        description: Date of the onetime purchase execution.
+      - name: product_title
+        description: The name of the product in a shop's catalog.
+      - name: variant_title
+        description: The name of the variant in a shop's catalog.
+      - name: price
+        description: The price of the item before discounts, taxes, or shipping have been applied.
+      - name: quantity
+        description: The number of items in the onetime purchase.
+      - name: status
+        description: The status of the onetime product.
+        tests:
+          - accepted_values:
+              values: ['ONETIME','NULL']
+              config:
+                severity: warn
+      - name: shopify_variant_id
+        description: The variant ID as retrieved from Shopify.
+      - name: recharge_product_id
+        description: The product ID as retrieved from Recharge.
+      - name: sku
+        description: The unique identifier of the item in fulfillment.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
