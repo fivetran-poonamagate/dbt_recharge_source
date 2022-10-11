@@ -983,3 +983,65 @@ models:
         description: Boolean indicating if a row have been deleted in the source.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__subscription
+    description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer receives on a recurring basis.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - subscription_id
+
+    columns:
+      - name: subscription_id
+        description: The unique ID of the subscription.
+        tests:
+          - not_null
+      - name: customer_id
+        description: Unique numeric identifier for the customer the subscription is ties to.
+      - name: address_id
+        description: Unique numeric identifier for the address the subscription is associated with.
+      - name: created_at
+        description: The date and time when the subscription was created.
+      - name: product_title
+        description: The name of the product in a shop's catalog.
+      - name: variant_title
+        description: The name of the variant in a shop's catalog.
+      - name: sku
+        description: A unique identifier of the item in fulfillment.
+      - name: price
+        description: The price of the item before discounts, taxes, or shipping have been applied.
+      - name: quantity
+        description: The number of items in the subscription.
+      - name: status
+        description: The status of the subscription; active = the subscription is active, cancelled = the subscription has been cancelled, expired = the subscription has expired - this occurs when the maximum number of charges for product have been reached.
+        tests:
+          - accepted_values:
+              values: ['ACTIVE','CANCELLED','EXPIRED','ONETIME']
+              config:
+                severity: warn
+      - name: next_charge_scheduled_at
+        description: Date of the next charge for the subscription.
+      - name: charge_interval_frequency
+        description: The number of units (specified in order_interval_unit) between each charge.
+      - name: expire_after_specific_number_of_charges
+        description: Set the number of charges until subscription expires.
+      - name: number_charges_until_expiration
+        description: Number of charges until the subscription expires.
+      - name: order_interval_frequency
+        description: The number of units (specified in order_interval_unit) between each order, e.g. order_interval_unit = 'month' and order_interval frequency = 3 indicates an order every 3 months.
+      - name: order_interval_unit
+        description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+      - name: updated_at
+        description: The date and time when the subscription was created.
+      - name: shopify_product_id
+        description: Unique numeric identifier of the product in Shopify.
+      - name: shopify_variant_id
+        description: Unique numeric identifier of the product variant in Shopify.
+      - name: cancelled_at
+        description: The date and time when the subscription was cancelled.
+      - name: cancellation_reason
+        description: Reason provided for cancellation.
+      - name: cancellation_reason_comments
+        description: Additional comment for cancellation.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
