@@ -690,3 +690,109 @@ models:
         description: The unique identifier of the item in fulfillment.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__order
+    description: Table of all orders after a charge is successfully processed.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+
+    columns:
+      - name: order_id
+        description: The unique ID of the order.
+        tests:
+          - not_null
+      - name: shopify_order_id
+        description: Unique numeric identifier within Shopify for the order.
+      - name: shopify_order_number
+        description: The unique order number within Shopify.
+      - name: customer_id
+        description: The unique numeric identifier of the customer.
+      - name: customer_full_name
+        description: The full name of the customer.
+      - name: email
+        description: The email address of the customer.
+      - name: created_at
+        description: The date and time when the order was created.
+      - name: order_status
+        description: The status of the order within Shopify.
+        tests:
+          - accepted_values:
+              values: ['CANCELLED','ERROR','QUEUED','SUCCESS']
+              config:
+                severity: warn
+      - name: updated_at
+        description: The date and time when the order was last updated.
+      - name: charge_id
+        description: The unique numeric identifier of the charge.
+      - name: transaction_id
+        description: The unique alphanumeric identifier of the transaction.
+      - name: charge_status
+        description: The status of the charge.
+        tests:
+          - accepted_values:
+              values: ['ERROR','PARTIALLY_REFUNDED','REFUNDED','SKIPPED','SUCCESS','NULL']
+              config:
+                severity: warn
+      - name: is_prepaid
+        description: An order that has been paid for a pre-determined number of months, accepted values; 0 = "No" and 1 = "Yes".
+      - name: payment_processor
+        description: The type of payment the processor has chosen.
+      - name: total_price
+        description: The sum of all prices of the item in the order with taxes and discounts included (must be positive).
+      - name: order_type
+        description: Shows if the order was made through checkout or if it's a recurring charge.
+        tests:
+          - accepted_values:
+              values: ['CHECKOUT','RECURRING']
+              config:
+                severity: warn
+      - name: processed_at
+        description: The date and time when the order was submitted. 
+      - name: scheduled_at
+        description: The date and time when the order will be shipped.
+      - name: shipped_date
+        description: The date when the order will be processed.
+      - name: address_id
+        description: The ID of the customer's shipping address that this order is tied to.
+      - name: address_is_active
+        description: Indicates if the address is currently active, accepted values range from 0 = "No" and 1 = "Yes".
+      - name: billing_address_full_name
+        description: The full name associated to the customer's billing address.
+      - name: billing_address_line_1
+        description: The first line of the billing address.
+      - name: billing_address_line_2
+        description: Any additional information associated with the customer's billing address.
+      - name: billing_address_city
+        description: The city of the billing address.
+      - name: billing_address_province
+        description: The province or state name of the billing address.
+      - name: billing_address_country
+        description: The country of the billing address.
+      - name: billing_address_zip
+        description: The zip or post code of the billing address.
+      - name: billing_address_company
+        description: The name of the company associated with the billing address.
+      - name: billing_address_phone
+        description: The phone number of the billing address.
+      - name: shipping_address_full_name
+        description: The full name associated to the customer's shipping address.
+      - name: shipping_address_line_1
+        description: The first line of the shipping address.
+      - name: shipping_address_line_2
+        description: Any additional information associated with the customer's shipping address.
+      - name: shipping_address_city
+        description: The city of the shipping_address.
+      - name: shipping_address_province
+        description: The province or state name of the shipping address.
+      - name: shipping_address_country
+        description: The country of the shipping address.
+      - name: shipping_address_zip
+        description: The zip or post code of the shipping address.
+      - name: shipping_address_company
+        description: The name of the company associated with the shipping address.
+      - name: shipping_address_phone
+        description: The phone number of the billing address.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
