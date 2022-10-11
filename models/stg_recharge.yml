@@ -844,3 +844,75 @@ models:
         description: The same as price - the price of the item in the order.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__payment_source
+    description: Table of payment and billing information.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - customer_id
+
+    columns:
+      - name: customer_id
+        description: The unique ID of the customer.
+        tests:
+          - not_null
+      - name: index
+        description: A unique numeric row produced for every concurrent customer_id.
+      - name: processor_name
+        description: Possible values - stripe, braintree, authorize, shopify_payments, mollie.
+      - name: payment_type
+        description: The type of payment this is.
+        tests:
+          - accepted_values:
+              values: ['apple_pay','credit','google_pay','paypal','unknown','NULL']
+              config:
+                severity: warn
+      - name: payment_token
+        description: The customer token at the processor.
+      - name: status
+        description: State of the payment method.
+        tests:
+          - accepted_values:
+              values: ['active','failed']
+              config:
+                severity: warn
+      - name: status_reason
+        description: The status reason for the payment method.
+      - name: cardholder_name
+        description: The name of the card holder.
+      - name: card_brand
+        description: The brand of the card.
+        tests:
+          - accepted_values:
+              values: ['american_express','mastercard','visa','NULL']
+              config:
+                severity: warn
+      - name: card_exp_month
+        description: The card expiry month.
+      - name: card_exp_year
+        description: The card expiry year.
+      - name: card_last_4
+        description: The last 4 digits of the identifier.
+      - name: has_card_error_in_dunning
+        description: Boolean indicating if the customer has a credit card in dunning.
+      - name: billing_address_full_name
+        description: The billing address full name associated to the customer.
+      - name: billing_address_line_1
+        description: The first line of the billing address associated to the customer
+      - name: billing_address_line_2
+        description: Any additional information associated to the customer's billing address.
+      - name: billing_address_city
+        description: The city associated to the customer's billing address.
+      - name: billing_address_province
+        description: The province or state name associated to the customer's billing address.
+      - name: billing_address_zip
+        description: The zip or post code associated to the customer's billing address.
+      - name: billing_address_country
+        description: The country associated to the customer's billing address.
+      - name: billing_address_company
+        description: The company name associated to the customer's billing address.
+      - name: billing_address_phone
+        description: The phone number associated to the customer's billing address.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
