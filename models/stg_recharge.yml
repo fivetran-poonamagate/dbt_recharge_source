@@ -916,3 +916,70 @@ models:
         description: The phone number associated to the customer's billing address.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__product
+    description: Table of all products sold on the merchant's website.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+
+    columns:
+      - name: product_id
+        description: The unique ID of the product.
+        tests:
+          - not_null
+      - name: product_title
+        description: The product title retrieved from Shopify.
+      - name: discount_amount
+        description: The discount amount applied on the product.
+      - name: discount_type
+        description: The type of discount.
+        tests:
+          - accepted_values:
+              values: ['percentage','NULL']
+              config:
+                severity: warn
+      - name: handle
+        description: A human-friendly unique string for the product automatically generated from Shopify.
+      - name: large_image
+        description: A large image file of the product.
+      - name: medium_image
+        description: A medium image file of the product.
+      - name: original_image
+        description: The original image file of the product.
+      - name: small_image
+        description: A small image file of the product.
+      - name: charge_interval_frequency
+        description: The number of units (specified in order_interval_unit) between each charge.
+      - name: cutoff_day_of_month
+        description: Number of day in month on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+      - name: cutoff_day_of_week
+        description: Number of day in week on which the customer will be charged. Cut-off windows create an interval between the day a customer goes through Recharge checkout to purchase a new subscription and when the client charges that customer again for their recurring order.
+      - name: expire_after_specific_number_of_charges
+        description: Number of charges until the subscription expires.
+      - name: modifiable_properties
+        description: A list of modifiable line item properties (e.g. ["box-edition", "christmas-special"])
+      - name: number_charges_until_expiration
+        description: Number of charges until the subscription expires.
+      - name: order_day_of_month
+        description: The set day of the month order is created. This is only applicable to subscriptions with order_interval_unit = “month”.
+      - name: order_day_of_week
+        description: The set day of the week order is created. This is only applicable to subscriptions with order_interval_unit = “week”; value of 0 equals to Monday, 1 to Tuesday etc.
+      - name: order_interval_frequency_options
+        description: List of order interval frequency options that a customer can choose from (e.g. order_interval_unit = month and order_internal_frequency_option for 3 would be an order every 3 months).
+      - name: order_interval_unit
+        description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
+      - name: storefront_purchase_options
+      - name: collection_id
+        description: Unique numeric identifier for the rule set charge in Recharge.
+      - name: shopify_product_id
+        description: Unique numeric identifier of the product in Shopify.
+      - name: created_at
+        description: The date and time when the product was created.
+      - name: updated_at
+        description: The date and time when the product was updated.
+      - name: is_deleted
+        description: Boolean indicating if a row have been deleted in the source.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.

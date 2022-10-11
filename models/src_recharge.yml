@@ -789,7 +789,6 @@ sources:
           - name: subscription_defaults_order_interval_unit
             description: The frequency with which a subscription should have the order created with (valid values are “day”, “week”, and “month”).
           - name: subscription_defaults_storefront_purchase_options
-            description: Placeholder.
           - name: collection_id
             description: Unique numeric identifier for the rule set charge in Recharge.
           - name: shopify_product_id
