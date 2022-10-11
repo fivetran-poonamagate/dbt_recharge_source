@@ -1045,3 +1045,10 @@ models:
         description: Additional comment for cancellation.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__subscription_history
+    description: History table that builds over time. Does not capture history prior to connecting Fivetran.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - subscription_id
