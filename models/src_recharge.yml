@@ -904,7 +904,12 @@ sources:
           - name: number_charges_until_expiration
           - name: _fivetran_deleted
             description: Boolean indicating if a row have been deleted in the source.
+          - name: property_shipping_interval_unit_type
+            description: The frequency unit type which an order should be shipped by. Valid values are “day”,“week”, and “month”.
+          - name: property_shipping_interval_frequency
+            description: Shipping interval frequency options that a customer can choose from.
           - name: property_price
           - name: property_title
             description: The title of the product
           - name: property_charge_interval_unit_type
+            description: The condition of how frequent the items are charged.
