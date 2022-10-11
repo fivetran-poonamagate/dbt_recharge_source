@@ -575,3 +575,70 @@ models:
         description: Boolean indicating if a row have been deleted in the source.
       - name: _fivetran_synced
         description: Timestamp indicating when Fivetran last successfully synced the row.
+
+  - name: stg_recharge__discount
+    description: Table of discounts that can be applied to a checkout, or that can be directly applied to an address.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - discount_id
+
+    columns:
+      - name: discount_id
+        description: Unique numeric identifier for the discount in Recharge.
+        tests:
+          - not_null
+      - name: created_at
+        description: The date and time when the discount was created.
+      - name: updated_at
+        description: The date and time when the discount was last updated.
+      - name: starts_at
+        description: The date when the discount becomes active.
+      - name: ends_at
+        description: The expiration time of the discount, past this time the discount can no longer be redeemed, once the time of the discount has passed the status of the discount will go from 'active' to 'disabled'.
+      - name: discount_code
+        description: The code used to apply the discount.
+      - name: discount_amount
+        description: The discounted value to be applied.
+      - name: discount_type
+        description: The type of discount.
+        tests:
+          - accepted_values:
+              values: ['fixed_amount','percentage','shipping']
+              config:
+                severity: warn
+      - name: status
+        description: The status of the discount.
+        tests:
+          - accepted_values:
+              values: ['disabled','enabled','fully_disabled']
+              config:
+                severity: warn
+      - name: times_used
+        description: An integer indicating how many times the discount has been used.
+      - name: usage_limit
+        description: An integer indicating how many times the discount can been used.
+      - name: applies_to
+        description: Indicates where the discount applies.
+      - name: applies_to_resource
+        description: An indicator of the type of resource which applies_to_id refers.
+      - name: applies_to_id
+        description: A list of ids of the type indicated in applies_to_resource for which the discount can be applied.
+      - name: applies_to_product_type
+        description: Indicates which product types the discount applies to.
+      - name: duration
+        description: How long the discount can be used.
+        tests:
+          - accepted_values:
+              values: ['forever','single_use','usage_limit']
+              config:
+                severity: warn
+      - name: duration_usage_limit
+        description: An integer of how long the discount can be used in accordance to it's duration.
+      - name: minimum_order_amount
+      - name: once_per_customer
+        description: Boolean indicating whether the discount applies only once to a customer.
+      - name: applies_once
+        description: Boolean indicating whether the discount applies only once.
+      - name: _fivetran_synced
+        description: Timestamp indicating when Fivetran last successfully synced the row.
