@@ -443,6 +443,8 @@ sources:
             description: The date and time when the customer was created.
           - name: updated_at
             description: The date and time when the customer was last updated.
+          - name: first_charge_processed_at
+            description: Date when first charge was processed for the customer.
           - name: first_name
             description: The customer's first name.
           - name: last_name
@@ -456,7 +458,7 @@ sources:
           - name: billing_last_name
             description: The customer's billing first name. Required when creating a customer.
           - name: billing_address_1
-            description: The customer's billing address
+            description: The first line of the customer's billing address.
           - name: billing_address_2
             description: An additional field for the customer's billing address.
           - name: billing_zip
