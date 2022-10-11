@@ -54,8 +54,7 @@ with base as (
         , shipping_rate_handle
         , shipping_rate_phone_required
         , note_attributes
-        , billing_address_first_name
-        , billing_address_last_name
+        , billing_address_first_name || ' ' || billing_address_last_name as billing_address_full_name
         , billing_address_address_1 as billing_address_line_1
         , billing_address_address_2 as billing_address_line_2
         , billing_address_city
@@ -64,8 +63,7 @@ with base as (
         , billing_address_country
         , billing_address_company
         , billing_address_phone
-        , shipping_address_first_name
-        , shipping_address_last_name
+        , shipping_address_first_name || ' ' || shipping_address_last_name as shipping_address_full_name
         , shipping_address_address_1 as shipping_address_line_1
         , shipping_address_address_2 as shipping_address_line_2
         , shipping_address_city
