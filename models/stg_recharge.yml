@@ -4,15 +4,12 @@ version: 2
 models:
   - name: stg_recharge__address
     description: Table of all addresses, an address represents a shipping address. Each customer can have multiple addresses, subscriptions are a child object of an address.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - address_id
 
     columns:
       - name: address_id
         description: The unique ID of the address.
         tests:
+          - unique
           - not_null
       - name: customer_id
         description: Unique numeric identifier for the customer associated with the address.
@@ -73,15 +70,12 @@ models:
 
   - name: stg_recharge__charge
     description: Table of all charges (financial transactions) linked to the purchase of an item. A charge is linked to a corresponding order, an order is created once the corresponding charge is successful.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - charge_id
 
     columns:
       - name: charge_id
         description: The unique ID of the charge.
         tests:
+          - unique
           - not_null
       - name: customer_id
         description: The ID of the customer associated with the charge.
@@ -310,15 +304,12 @@ models:
 
   - name: stg_recharge__checkout
     description: Table of all checkouts to manage recurring orders, billing and payments, only available for BigCommerce and Custom. Checkouts on Shopify must go through Shopify.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - checkout_id
 
     columns:
       - name: checkout_id
         description: Unique ID for the checkout.
         tests:
+          - unique
           - not_null
       - name: charge_id 
         description: The unique ID of the charge.
@@ -500,15 +491,12 @@ models:
 
   - name: stg_recharge__customer
     description: Table of all customer details holding account and billing information. Email is unique on the customer, no two customers for a store can have the same email.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - customer_id
     
     columns:
       - name: customer_id
         description: The unique ID of the customer.
         tests:
+          - unique
           - not_null
       - name: hash
         description: The unique string identifier used in a customer portal link.
@@ -578,15 +566,12 @@ models:
 
   - name: stg_recharge__discount
     description: Table of discounts that can be applied to a checkout, or that can be directly applied to an address.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - discount_id
 
     columns:
       - name: discount_id
         description: Unique numeric identifier for the discount in Recharge.
         tests:
+          - unique
           - not_null
       - name: created_at
         description: The date and time when the discount was created.
@@ -645,15 +630,12 @@ models:
 
   - name: stg_recharge__one_time_product
     description: Table of all one-times which represent non-recurring line items on a queued charges.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - one_time_product_id
 
     columns:
       - name: one_time_product_id
         description: The unique numeric identifier for the onetime purchase.
         tests:
+          - unique
           - not_null
       - name: address_id
         description: Unique numeric identifier for the address the onetime purchase is associated with (cannot be used with next_charge_scheduled_at).
@@ -693,15 +675,12 @@ models:
 
   - name: stg_recharge__order
     description: Table of all orders after a charge is successfully processed.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - order_id
 
     columns:
       - name: order_id
         description: The unique ID of the order.
         tests:
+          - unique
           - not_null
       - name: shopify_order_id
         description: Unique numeric identifier within Shopify for the order.
@@ -847,15 +826,12 @@ models:
 
   - name: stg_recharge__payment_source
     description: Table of payment and billing information.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - customer_id
 
     columns:
       - name: customer_id
         description: The unique ID of the customer.
         tests:
+          - unique
           - not_null
       - name: index
         description: A unique numeric row produced for every concurrent customer_id.
@@ -919,15 +895,12 @@ models:
 
   - name: stg_recharge__product
     description: Table of all products sold on the merchant's website.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - product_id
 
     columns:
       - name: product_id
         description: The unique ID of the product.
         tests:
+          - unique
           - not_null
       - name: product_title
         description: The product title retrieved from Shopify.
@@ -986,15 +959,12 @@ models:
 
   - name: stg_recharge__subscription
     description: Table of all subscriptions for the merchant. Subscriptions are individual items a customer receives on a recurring basis.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - subscription_id
 
     columns:
       - name: subscription_id
         description: The unique ID of the subscription.
         tests:
+          - unique
           - not_null
       - name: customer_id
         description: Unique numeric identifier for the customer the subscription is ties to.
