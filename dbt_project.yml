@@ -35,7 +35,7 @@ models:
       materialized: view
 
 vars:
-  recharge:
+  recharge_source:
     address: "{{ source('recharge_source','address') }}"
     address_shipping_line: "{{ source('recharge_source','address_shipping_line') }}"
     charge: "{{ source('recharge_source','charge') }}"
