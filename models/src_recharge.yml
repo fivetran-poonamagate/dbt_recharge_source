@@ -4,6 +4,10 @@ version: 2
 sources:
   - name: recharge
     description: Subscriptions payments platform designed for merchants to set up and manage dynamic recurring billing across web and mobile.
+
+    database: "{% if target.type != 'spark'%}{{var ('recharge', target.database)}}{% endif %}"
+    schema: "{{var ('recharge_schema', 'recharge')}}"
+
     database: dev_fivetran
     schema: recharge
 
