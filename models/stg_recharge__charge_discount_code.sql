@@ -1,12 +1,12 @@
 
 with base as (
-    select
-        *
-    from
-        {{ ref('stg_recharge__charge_discount_code_tmp') }}
-)
 
-, fields as (
+    select *
+    from {{ ref('stg_recharge__charge_discount_code_tmp') }}
+),
+
+fields as (
+
     select
         {{
             fivetran_utils.fill_staging_columns(
@@ -14,22 +14,19 @@ with base as (
                 staging_columns = get_charge_discount_code_columns()
             )
         }}
-    from 
-        base
-)
+    from base
+),
 
-, final as (
+final as (
+
     select
-        charge_id
-        , index
-        , discount_id
-        , amount
-        , cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
-    from
-        fields
+        charge_id,
+        index,
+        discount_id,
+        amount,
+        cast(_fivetran_synced as {{ dbt_utils.type_timestamp() }}) as _fivetran_synced
+    from fields
 )
 
-select
-    *
-from
-    final
+select *
+from final
